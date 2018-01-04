@@ -1,15 +1,33 @@
-prog    = exemplo
-lexfile = exemplo-1.4.l
+program      = exemplo
+lexfile      = $(shell ls *.l)
 
-LEX     = lex
+prerequisite = lex.yy.c
+sources      = $(prerequisite)
+objects      = $(sources:.c=.o)
 
-all: $(prog)
+CC           = gcc
+LD           = $(CC)
+LEX          = lex
+#WARNINGS    = -Wall
+#GDBFLAGS    = -g
+LIBS         = -ll
+INCLUDES     =
+DEFINEFLAGS  =
+CFLAGS       = $(WARNINGS) $(GDBFLAGS) $(INCLUDES) $(DEFINEFLAGS)
+LDFLAGS      =
 
-lex.yy.c:
+TARGETS      = $(prerequisite) $(program)
+
+all:        $(TARGETS)
+
+.c.o:
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+$(program): $(objects)
+	$(LD) $(LDFLAGS) -o $@ $+ $(LIBS)
+
+lex.yy.c:   $(lexfile)
 	$(LEX) $(lexfile)
 
-$(prog) : lex.yy.c
-	$(CC) $^ -o $@ -ll
-
 clean:
-	/bin/rm -rf lex.yy.c $(prog)
+	/bin/rm -rf $(TARGETS) $(objects)

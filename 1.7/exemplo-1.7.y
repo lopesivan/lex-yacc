@@ -3,11 +3,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define YYSTYPE char *
+#define YYDEBUG 1
+#define YYSTYPE char*
 void yyerror(const char *str);
 int yywrap();
 int yylex();
+
 %}
+
+/* %type <text> zone_set */
+/* %type <text> zonestatement */
+%union {
+    char* text;
+}
+%type <text> quotedname
 
 %token FILETOK SEMICOLON OBRACE EBRACE ZONETOK QUOTE WORD FILENAME
 
@@ -23,7 +32,7 @@ command:
 zone_set:
     ZONETOK quotedname zonecontent
     {
-        printf("Complete zone for '%s' found\n",$2);
+        printf("Complete zone for '%s' found\n", $2);
     }
     ;
 
@@ -46,8 +55,9 @@ zonestatement:
 quotedname:
     QUOTE FILENAME QUOTE
     {
-       $$=$2;
+       $$ = $2;
     }
+    ;
 
 block:
     OBRACE zonestatements EBRACE SEMICOLON
@@ -64,7 +74,7 @@ statement: WORD | block | quotedname
 
 void yyerror (const char *str)
 {
-    fprintf (stderr,"error: %s\n",str);
+    fprintf (stderr, "error: %s\n", str);
 }
 
 int yywrap()
@@ -77,5 +87,3 @@ int main()
     yyparse();
     return EXIT_SUCCESS;
 }
-
-

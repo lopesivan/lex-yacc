@@ -1,0 +1,2 @@
+heat on
+target temperature 22

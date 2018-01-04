@@ -10,15 +10,17 @@ void yyerror(const char *s);
 %token NUMBER TOKHEAT STATE TOKTARGET TOKTEMPERATURE
 
 %%
-commands: /* empty */
-        | commands command
-        ;
+commands:
+    /* empty */
+    |
+    commands command
+    ;
 
 command:
-        heat_switch
-        |
-        target_set
-        ;
+       heat_switch
+       |
+       target_set
+       ;
 
 heat_switch:
         TOKHEAT STATE

@@ -1,25 +1,38 @@
-prog     = exemplo
-lexfile  = exemplo-1.6.l
-yaccfile = exemplo-1.6.y
+program      = exemplo
+lexfile      = $(shell ls *.l)
+yaccfile     = $(shell ls *.y)
 
-LEX      = lex
-YACC     = yacc
-CC       = gcc
-LD       = gcc
+prerequisite = y.tab.c lex.yy.c
+sources      = $(prerequisite)
+objects      = $(sources:.c=.o)
 
-all: $(prog)
+CC           = gcc
+LD           = $(CC)
+LEX          = lex
+YACC         = yacc
+#WARNINGS    = -Wall
+#GDBFLAGS    = -g
+#LIBS         = -ll
+INCLUDES     = -I.
+DEFINEFLAGS  =
+CFLAGS       = $(WARNINGS) $(GDBFLAGS) $(INCLUDES) $(DEFINEFLAGS)
+LDFLAGS      =
 
-# Compile
+TARGETS      = $(prerequisite) $(program)
+
+all:        $(TARGETS)
+
 .c.o:
-	$(CC) -I . -c $<
+	$(CC) -c $(CFLAGS) -o $@ $<
 
-lex.yy.c: $(lexfile)
-	$(LEX) $(lexfile)
+$(program): $(objects)
+	$(LD) $(LDFLAGS) -o $@ $+ $(LIBS)
+
 y.tab.c: $(yaccfile)
 	$(YACC) -d $(yaccfile)
 
-$(prog): y.tab.o lex.yy.o
-	$(LD) $^ -o $@
+lex.yy.c:   $(lexfile)
+	$(LEX) $(lexfile)
 
 clean:
-	/bin/rm -rf exemplo-1.6.tab.c lex.yy.c y.tab.c y.tab.h lex.yy.o y.tab.o $(prog)
+	/bin/rm -rf $(TARGETS) $(objects) *.tab.?

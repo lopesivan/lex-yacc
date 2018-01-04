@@ -26,6 +26,12 @@ command:
     zone_set
     ;
 
+quotedname:
+    QUOTE FILENAME QUOTE
+    {
+        $$=$2;
+    }
+    ;
 zone_set:
     ZONETOK quotedname zonecontent
     {
@@ -36,12 +42,6 @@ zone_set:
 zonecontent:
     OBRACE zonestatements EBRACE
 
-quotedname:
-    QUOTE FILENAME QUOTE
-    {
-        $$=$2;
-    }
-    ;
 
 zonestatements:
     |

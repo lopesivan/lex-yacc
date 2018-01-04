@@ -1,0 +1,7 @@
+A idade do grupo de baralho:
+  - Maria tem 40 anos;
+  - Jorge tem 49 anos;
+  - Carla tem 68 anos;
+  - Sílvio tem 12 anos;
+  - Gomes tem 34 anos;
+  - Pablo tem 22 anos.

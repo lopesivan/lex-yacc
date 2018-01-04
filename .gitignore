@@ -80,3 +80,6 @@ bin-release/
 
 # End of https://www.gitignore.io/api/c,flex
 exemplo
+lex.yy.c
+y.tab.c
+y.tab.h

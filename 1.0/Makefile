@@ -1,5 +1,5 @@
 program      = exemplo
-lexfile      = $(shell ls *.l)
+lexfile      = $(shell ls *.lex)
 
 prerequisite = lex.yy.c
 sources      = $(prerequisite)

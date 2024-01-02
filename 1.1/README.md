@@ -1,4 +1,4 @@
-## Usando lex
+# Usando lex
 
 ```
 $ cat idade.txt |./exemplo
@@ -28,7 +28,6 @@ $ grep -Eo '[0-9]+' idade.txt| paste -sd+
 40+49+68+12+34+22
 ```
 
-
 ## Usando o comando sed
 
 ```
@@ -53,8 +52,8 @@ $ sed -n 's/.* \([0-9]\+\) .*/\1/p' idade.txt| paste -sd+ | bc
 225
 ```
 
-
 ## Usando o comando awk
+
 ```
 $ awk '{ match($0, /([0-9]+)/, arr);
          if(arr[1] != "") s+=arr[1]

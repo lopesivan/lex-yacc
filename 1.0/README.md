@@ -1,6 +1,6 @@
 # Aula 1.0
 
-Temos o seguinte arquivo, *idade.txt*, ele possui o conteúdo
+Temos o seguinte arquivo, _idade.txt_, ele possui o conteúdo
 abaixo:
 
 ```
@@ -15,12 +15,12 @@ A idade do grupo de baralho:
 
 Nosso objetivo é extrair deste arquivo os números inteiros
 presentes. Para tanto, vamos utilizar algumas ferramentas do
-*shell* e na sequência o código em *lex* que é nosso alvo de
+_shell_ e na sequência o código em _lex_ que é nosso alvo de
 aprendizado.
 
-### Usando o comando grep
+## Usando o comando grep
 
-O comando *grep* é sem sombra de duvida um dos comandos mais
+O comando _grep_ é sem sombra de duvida um dos comandos mais
 simples na extração de dados de arquivos textos. Sendo assim,
 basta determinar a expressão regular que case com os inteiros
 presentes no arquivo e aplicar.
@@ -48,9 +48,9 @@ $ grep -E '[0-9]+' idade.txt
 
 ```
 
-### Usando o comando sed
+## Usando o comando sed
 
-O comando *sed* é tão simples quanto o *grep*, e mais poderoso
+O comando _sed_ é tão simples quanto o _grep_, e mais poderoso
 tanto na criação de expressões regulares quanto na substituição
 de termos.
 
@@ -64,18 +64,17 @@ A idade é: 34
 A idade é: 22
 ```
 
-### Usando o lex
+## Usando o lex
 
 Como visto anteriormente, definimos uma expressão regular e
 extraimos os números inteiros do arquivo, agora faremos o mesmo
-mas neste caso utilizando nosso analizador sintático *lex*.
+mas neste caso utilizando nosso analizador sintático _lex_.
 
 Escrevemos um arqui que se subdivide em três sessoes, separadas
 por **%%**, onde a primeira possui os cabeçalhos de um programa
 em C, como inclusão de headers, locais ou não, definiçoes de
 protótipos de funçoes e declarações de variáveis globais ou
 tipos, entenda também estruturas e tipos.
-
 
 arquivo: exemplo-01.l
 
@@ -104,9 +103,10 @@ int main (void)
 ```
 
 compilando:
+
 ```
 $ make
-lex exemplo-01.l
+lex exemplo-01.lex
 cc lex.yy.c -o exemplo -ll
 ```
 
